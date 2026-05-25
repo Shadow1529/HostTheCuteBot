@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+:root {
+  --blurple: #5865F2;
+  --blurple-dark: #4752C4;
+  --bg: #0e0f13;
+  --bg-card: #16181e;
+  --bg-card-hover: #1e2028;
+  --border: #2a2d38;
+  --text: #e8eaf0;
+  --text-muted: #8b909e;
+  --mod-color: #f59e0b;
+  --game-color: #22d3ee;
+  --code-bg: #1e2028;
+  --radius: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(160deg, #1a1d2e 0%, #0e0f13 60%);
+  border-bottom: 1px solid var(--border);
+  padding: 3.5rem 1.5rem 3rem;
+}
+
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.avatar-ring {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blurple), #9b59b6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 32px rgba(88, 101, 242, 0.35);
+  flex-shrink: 0;
+}
+
+.avatar-inner {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.bot-name {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #fff 40%, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bot-tagline {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 480px;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.meta-sep { color: var(--border); }
+
+.meta-item {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.invite-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.7rem 1.75rem;
+  background: var(--blurple);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 4px 18px rgba(88, 101, 242, 0.4);
+}
+
+.invite-btn:hover {
+  background: var(--blurple-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(88, 101, 242, 0.5);
+}
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ── SECTION ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.section-badge {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 9999px;
+}
+
+.mod-badge {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--mod-color);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.util-badge {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.game-badge {
+  background: rgba(34, 211, 238, 0.12);
+  color: var(--game-color);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.section-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ── COMMANDS GRID ── */
+.commands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.875rem;
+}
+
+.command-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.125rem;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.command-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #3a3e50;
+  transform: translateY(-1px);
+}
+
+.command-name {
+  display: block;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #a5b4fc;
+  background: var(--code-bg);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  margin-bottom: 0.5rem;
+  width: fit-content;
+  word-break: break-all;
+}
+
+.command-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
