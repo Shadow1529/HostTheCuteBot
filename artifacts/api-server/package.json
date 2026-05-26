@@ -8,7 +8,10 @@
     "build": "node ./build.mjs",
     "start": "node --enable-source-maps ./dist/index.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "logs": "tail -f logs/bot.log | pino-pretty --colorize"
+    "logs": "tail -f logs/bot.log | pino-pretty --colorize",
+    "logs:commands": "tail -f logs/commands.log",
+    "logs:errors": "tail -f logs/errors.log",
+    "logs:members": "tail -f logs/members.log"
   },
   "dependencies": {
     "@discordjs/rest": "^2.6.1",

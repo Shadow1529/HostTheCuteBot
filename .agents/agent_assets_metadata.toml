@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "bsI60i6i8IMJQKaE5_4eG"
+uri = "file://artifacts/api-server/logs/commands.log"
+type = "unspecified"
+title = "Active Command Log"

@@ -12,6 +12,9 @@ import { logger } from "../lib/logger.js";
 import { commands, commandMap } from "./commands/index.js";
 import { sendMessageLog, sendInviteLog } from "./modlog.js";
 import { getConfig } from "./config.js";
+import { logCommand } from "./commandlog.js";
+import { logError } from "./errorlog.js";
+import { logMemberJoin, logMemberLeave } from "./memberlog.js";
 
 export async function startBot(): Promise<void> {
   const token = process.env["DISCORD_BOT_TOKEN"];
@@ -36,7 +39,7 @@ export async function startBot(): Promise<void> {
     logger.info({ tag: readyClient.user.tag }, "Discord bot logged in");
 
     readyClient.user.setPresence({
-      activities: [{ name: "/help | minigames & moderation", type: ActivityType.Playing }],
+      activities: [{ name: "Join us at: https://discord.gg/gWTSJqXFgR", type: ActivityType.Playing }],
       status: "online",
     });
 
@@ -60,10 +63,18 @@ export async function startBot(): Promise<void> {
     const command = commandMap.get(interaction.commandName);
     if (!command) return;
 
+    logCommand(interaction);
+
     try {
       await command.execute(interaction);
     } catch (err) {
       logger.error({ err, command: interaction.commandName }, "Command error");
+      logError({
+        command: `/${interaction.commandName}`,
+        user: interaction.user.tag,
+        server: interaction.guild ? `${interaction.guild.name} (${interaction.guild.id})` : "DM",
+        err,
+      });
       const payload = { content: "An error occurred while running this command.", ephemeral: true };
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp(payload).catch(() => null);
@@ -133,6 +144,8 @@ export async function startBot(): Promise<void> {
   client.on(Events.GuildMemberAdd, async (member) => {
     const guildId = member.guild.id;
 
+    logMemberJoin(member);
+
     // Auto role
     const autoRoleId = await getConfig(guildId, "auto_role");
     if (autoRoleId) {
@@ -167,9 +180,15 @@ export async function startBot(): Promise<void> {
     }
   });
 
+  // ── Member left ────────────────────────────────────────────────────────
+  client.on(Events.GuildMemberRemove, (member) => {
+    logMemberLeave(member);
+  });
+
   // ── Error ──────────────────────────────────────────────────────────────
   client.on(Events.Error, (err) => {
     logger.error({ err }, "Discord client error");
+    logError({ command: "discord.client", user: "—", server: "—", err });
   });
 
   await client.login(token);
