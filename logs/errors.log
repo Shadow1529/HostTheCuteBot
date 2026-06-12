@@ -1,2 +1,4 @@
 [2026-06-12 17:29:33] | CMD: /purge               | USER: uwuimanx                         | SERVER: Pluto (1514616573694967928) | ERR: Interaction has already been acknowledged.
 [2026-06-12 18:24:03] | CMD: discord.client       | USER: —                                | SERVER: — | ERR: Received one or more errors
+[2026-06-12 22:25:54] | CMD: /setmessagelog       | USER: uwuimanx                         | SERVER: Pluto (1514616573694967928) | ERR: Interaction has already been acknowledged.
+[2026-06-12 22:26:05] | CMD: /purge               | USER: uwuimanx                         | SERVER: Pluto (1514616573694967928) | ERR: Interaction has already been acknowledged.
